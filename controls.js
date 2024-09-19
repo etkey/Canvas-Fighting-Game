@@ -1,0 +1,86 @@
+const keys = {
+    a: { pressed: false },
+    d: { pressed: false },
+    w: { pressed: false },
+    c: { pressed: false },
+    ArrowLeft: { pressed: false },
+    ArrowRight: { pressed: false },
+    ArrowUp: { pressed: false },
+    1: { pressed: false },
+};
+
+window.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "d":
+            keys.d.pressed = true;
+            player1.lastKey = "d";
+            player1.direction = 1;
+            break;
+        case "a":
+            keys.a.pressed = true;
+            player1.lastKey = "a";
+            player1.direction = -1;
+            break;
+        case "w":
+            if (player1.velocity.y === 0 && player1.position.y + player1.height === canvas.height - 19) {
+                player1.velocity.y = -15;
+            }
+            break;
+        case " ":
+            player1.attack();
+            player1.lastKey = " ";
+            break;
+        case "c":
+            if (player1.checkHeavyAttack === true) {
+                player1.lastKey = "c";
+            }
+            break;
+        case "ArrowRight":
+            keys.ArrowRight.pressed = true;
+            player2.lastKey = "ArrowRight";
+            player2.direction = 1;
+            break;
+        case "ArrowLeft":
+            keys.ArrowLeft.pressed = true;
+            player2.lastKey = "ArrowLeft";
+            player2.direction = -1;
+            break;
+        case "ArrowUp":
+            if (player2.velocity.y === 0 && player2.position.y + player2.height === canvas.height - 19) {
+                player2.velocity.y = -15;
+            }
+            break;
+        case "0":
+            player2.attack();
+            player2.lastKey = "0";
+            break;
+        case "1":
+            if (player2.checkHeavyAttack === true) {
+                player2.lastKey = "1";
+            }
+            break;
+    }
+});
+
+window.addEventListener("keyup", (event) => {
+    switch (event.key) {
+        case "d":
+            keys.d.pressed = false;
+            break;
+        case "a":
+            keys.a.pressed = false;
+            break;
+        case "w":
+            keys.w.pressed = false;
+            break;
+        case "ArrowRight":
+            keys.ArrowRight.pressed = false;
+            break;
+        case "ArrowLeft":
+            keys.ArrowLeft.pressed = false;
+            break;
+        case "ArrowUp":
+            keys.ArrowUp.pressed = false;
+            break;
+    }
+});

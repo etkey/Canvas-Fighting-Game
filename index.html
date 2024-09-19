@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fighting Game</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="position: relative; display: inline-block">
+            <div
+                style="
+                    position: absolute;
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    padding: 20px;
+                "
+            >
+                <div
+                    style="
+                        position: relative;
+                        height: 50px;
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                    "
+                >
+                    <div
+                        style="background-color: red; height: 50px; width: 100%"
+                    ></div>
+                    <div
+                        id="player1-health"
+                        style="
+                            position: absolute;
+                            background: blue;
+                            height: 50px;
+                            top: 0;
+                            bottom: 0;
+                            right: 0;
+                            width: 100%;
+                        "
+                    ></div>
+                </div>
+                <div
+                    id="countdown"
+                    style="
+                        background-color: aliceblue;
+                        height: 75px;
+                        width: 10%;
+                        display: flex;
+                        flex-shrink: 0;
+                        justify-content: center;
+                        align-items: center;
+                    "
+                >
+                    60
+                </div>
+                <div style="position: relative; height: 50px; width: 100%">
+                    <div style="background-color: red; height: 50px"></div>
+                    <div
+                        id="player2-health"
+                        style="
+                            position: absolute;
+                            background: blue;
+                            height: 50px;
+                            top: 0;
+                            bottom: 0;
+                            right: 0;
+                            left: 0;
+                        "
+                    ></div>
+                </div>
+            </div>
+            <div
+                id="result"
+                style="
+                    position: absolute;
+                    align-items: center;
+                    justify-content: center;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    display: none;
+                "
+            >
+                Tie
+            </div>
+            <canvas></canvas>
+        </div>
+    </body>
+    <script src="canvas.js"></script>
+    <script src="sprite.js"></script>
+    <script src="players.js"></script>
+    <script src="utilities.js"></script>
+    <script src="game.js"></script>
+    <script src="controls.js"></script>
+</html>
+
+//230
