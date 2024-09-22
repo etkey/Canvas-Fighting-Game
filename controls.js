@@ -14,20 +14,23 @@ window.addEventListener("keydown", (event) => {
         case "d":
             keys.d.pressed = true;
             player1.lastKey = "d";
-            player1.direction = 1;
+            if (!player1.isDead) player1.direction = 1;
             break;
         case "a":
             keys.a.pressed = true;
             player1.lastKey = "a";
-            player1.direction = -1;
+            if (!player1.isDead) player1.direction = -1;
             break;
         case "w":
-            if (player1.velocity.y === 0 && player1.position.y + player1.height === canvas.height - 19) {
+            if (
+                player1.velocity.y === 0 &&
+                player1.position.y + player1.height === canvas.height - 19
+            ) {
                 player1.velocity.y = -15;
             }
             break;
         case " ":
-            player1.attack();
+            if (!player1.isDead) player1.attack();
             player1.lastKey = " ";
             break;
         case "c":
@@ -38,20 +41,23 @@ window.addEventListener("keydown", (event) => {
         case "ArrowRight":
             keys.ArrowRight.pressed = true;
             player2.lastKey = "ArrowRight";
-            player2.direction = 1;
+            if (!player2.isDead) player2.direction = 1;
             break;
         case "ArrowLeft":
             keys.ArrowLeft.pressed = true;
             player2.lastKey = "ArrowLeft";
-            player2.direction = -1;
+            if (!player2.isDead) player2.direction = -1;
             break;
         case "ArrowUp":
-            if (player2.velocity.y === 0 && player2.position.y + player2.height === canvas.height - 19) {
+            if (
+                player2.velocity.y === 0 &&
+                player2.position.y + player2.height === canvas.height - 19
+            ) {
                 player2.velocity.y = -15;
             }
             break;
         case "0":
-            player2.attack();
+            if (!player2.isDead) player2.attack();
             player2.lastKey = "0";
             break;
         case "1":
