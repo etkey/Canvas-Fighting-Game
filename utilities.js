@@ -14,10 +14,7 @@ function selectWinner({ player1, player2, timerId }) {
     if (player1.health === player2.health) {
     } else if (player1.health > player2.health) {
         displayResult.innerHTML = "Player 1 Wins!";
-        player2.isDead = true;
-        player2.switchSprites("death");
     } else {
         displayResult.innerHTML = "Player 2 Wins!";
-        player1.isDead = true;
     }
 }

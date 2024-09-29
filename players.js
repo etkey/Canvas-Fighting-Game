@@ -134,10 +134,13 @@ class Players extends Sprite {
         this.attackCount++;
         if (this.attackCount % 3 === 1) {
             this.switchSprite("attack1");
+            attackSound1.Audio.play();
         } else if (this.attackCount % 3 === 2) {
             this.switchSprite("attack2");
+            attackSound2.Audio.play();
         } else {
             this.switchSprite("attack3");
+            attackSound3.Audio.play();
         }
         setTimeout(() => {
             this.isAttacking = false;
@@ -146,8 +149,9 @@ class Players extends Sprite {
 
     switchSprite(sprite) {
         if (this.image === this.sprites.death.image) {
-            if (this.framesCurrentW === this.sprites.death.framesW - 1)
+            if (this.framesCurrentW === this.sprites.death.framesW - 1) {
                 this.isDead = true;
+            }
             return;
         }
         if (
@@ -307,7 +311,7 @@ const player1 = new Players({
         hurt: {
             imageSrc: "./assets/Player1/player1_hurt.png",
             framesW: 3,
-            framesHold: 6,
+            framesHold: 4,
         },
     },
 
