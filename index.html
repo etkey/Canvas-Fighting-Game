@@ -4,10 +4,23 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Fighting Game</title>
-        <link rel="icon" type="image/x-icon" href="shield.png">
+        <link rel="icon" type="image/x-icon" href="shield.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
         <style>
             * {
                 box-sizing: border-box;
+                font-family: "Jersey 20", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+            #player1-health,
+            #player2-health {
+                transition: width 0.2s ease;
             }
         </style>
     </head>
@@ -25,21 +38,22 @@
                 <div
                     style="
                         position: relative;
-                        height: 50px;
                         width: 100%;
                         display: flex;
                         justify-content: flex-end;
+                        border: 7px solid #0c0a09;
+                        border-right: 5px;
                     "
                 >
                     <div
-                        style="background-color: red; height: 50px; width: 100%"
+                        style="background-color: red; height: 40px; width: 100%"
                     ></div>
                     <div
                         id="player1-health"
                         style="
                             position: absolute;
-                            background: blue;
-                            height: 50px;
+                            background: #8b5cf6;
+                            height: 40px;
                             top: 0;
                             bottom: 0;
                             right: 0;
@@ -51,24 +65,34 @@
                     id="countdown"
                     style="
                         background-color: aliceblue;
+                        font-size: 35px;
                         height: 75px;
                         width: 10%;
                         display: flex;
                         flex-shrink: 0;
                         justify-content: center;
                         align-items: center;
+                        color: gray;
+                        border: 5px solid #0c0a09;
                     "
                 >
                     60
                 </div>
-                <div style="position: relative; height: 50px; width: 100%">
-                    <div style="background-color: red; height: 50px"></div>
+                <div
+                    style="
+                        position: relative;
+                        width: 100%;
+                        border: 7px solid #0c0a09;
+                        border-left: 5px;
+                    "
+                >
+                    <div style="background-color: red; height: 40px"></div>
                     <div
                         id="player2-health"
                         style="
                             position: absolute;
-                            background: blue;
-                            height: 50px;
+                            background: #8b5cf6;
+                            height: 40px;
                             top: 0;
                             bottom: 0;
                             right: 0;
@@ -88,6 +112,7 @@
                     left: 0;
                     bottom: 0;
                     display: none;
+                    font-size: 30px;
                 "
             >
                 Tie
@@ -104,9 +129,5 @@
     </body>
 </html>
 
-// fixed/added direction
-// continuous jumping fixed
-// added attack combos
-// added heavy attack
-// added moving npcs
-// added sound effects
+// fixed/added direction // continuous jumping fixed // added attack combos //
+added heavy attack // added moving npcs // added sound effects //added attack cooldown

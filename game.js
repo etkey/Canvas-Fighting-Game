@@ -25,6 +25,8 @@ function animate() {
     pigeon.update();
     girlOnTheBalcony.update();
     dog.update();
+    ctx.fillStyle = "rgba(0,0,0, 0.15)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     player1.update();
     player2.update();
     player1.velocity.x = 0;
@@ -38,6 +40,8 @@ function animate() {
         player1.velocity.x = 5;
         player1.switchSprite("run");
         if (player1.position.y === 407) chainRun1.Audio.play();
+    } else if (keys.s.pressed && player1.lastKey === "s") {
+        player1.switchSprite("block");
     } else {
         player1.switchSprite("idle");
     }
@@ -47,9 +51,6 @@ function animate() {
     } else if (player1.velocity.y > 0) {
         player1.switchSprite("jumpDown");
         if (player1.position.y >= 390) chainLand.Audio.play();
-    }
-    if (player1.health === 0) {
-        player1.switchSprite("death");
     }
 
     if (keys.ArrowLeft.pressed && player2.lastKey === "ArrowLeft") {
@@ -84,6 +85,7 @@ function animate() {
         if (player2.health <= 0) player2.health = 0;
         if (player2.health === 0) {
             player2.switchSprite("death");
+            strangledThroat.Audio.play();
         }
         impact();
         player2.switchSprite("hurt");
@@ -100,6 +102,7 @@ function animate() {
         if (player2.health <= 0) player2.health = 0;
         if (player2.health === 0) {
             player2.switchSprite("death");
+            strangledThroat.Audio.play();
         }
         player1.checkHeavyAttack = false;
         impact();
@@ -110,7 +113,8 @@ function animate() {
 
     if (
         collisionDetection({ box1: player2, box2: player1 }) &&
-        player2.isAttacking
+        player2.isAttacking &&
+        !player1.isBlocking
     ) {
         player2.succesfulAttackCount++;
         player2.isAttacking = false;
@@ -118,6 +122,7 @@ function animate() {
         if (player1.health <= 0) player1.health = 0;
         if (player1.health === 0) {
             player1.switchSprite("death");
+            bloodSpill.Audio.play();
         }
         impact();
         player1.switchSprite("hurt");
@@ -126,6 +131,12 @@ function animate() {
         }
         document.querySelector("#player1-health").style.width =
             player1.health + "%";
+    } else if (
+        collisionDetection({ box1: player2, box2: player1 }) &&
+        player2.isAttacking &&
+        player1.isBlocking
+    ) {
+        player1.switchSprite("blockImpact");
     }
     if (
         collisionDetection({ box1: player2, box2: player1 }) &&
@@ -139,6 +150,7 @@ function animate() {
         if (player1.health <= 0) player1.health = 0;
         if (player1.health === 0) {
             player1.switchSprite("death");
+            bloodSpill.Audio.play();
         }
         impact();
         player1.switchSprite("hurt");

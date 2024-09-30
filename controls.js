@@ -6,6 +6,7 @@ const keys = {
     ArrowLeft: { pressed: false },
     ArrowRight: { pressed: false },
     ArrowUp: { pressed: false },
+    s: { pressed: false },
     1: { pressed: false },
 };
 
@@ -27,6 +28,16 @@ window.addEventListener("keydown", (event) => {
                 player1.position.y + player1.height === canvas.height - 19
             ) {
                 player1.velocity.y = -15;
+            }
+            break;
+        case "s":
+            if (player1.velocity.y === 0) {
+                keys.s.pressed = true;
+                player1.velocity.y = 0;
+                player1.velocity.x = 0;
+                player1.canAttack = false;
+                player1.isBlocking = true;
+                player1.lastKey = "s";
             }
             break;
         case " ":
@@ -75,6 +86,11 @@ window.addEventListener("keyup", (event) => {
             break;
         case "a":
             keys.a.pressed = false;
+            break;
+        case "s":
+            keys.s.pressed = false;
+            player1.canAttack = true;
+            player1.isBlocking = false;
             break;
         case "w":
             keys.w.pressed = false;

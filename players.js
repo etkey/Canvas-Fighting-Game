@@ -26,6 +26,9 @@ class Players extends Sprite {
             position,
             offset,
         });
+        this.isBlocking = false;
+        this.canAttack = true;
+        this.attackCooldown = 600;
         this.isDead = false;
         this.direction = direction;
         this.velocity = velocity;
@@ -130,7 +133,9 @@ class Players extends Sprite {
     }
 
     attack() {
+        if (!this.canAttack) return;
         this.isAttacking = true;
+        this.canAttack = false;
         this.attackCount++;
         if (this.attackCount % 3 === 1) {
             this.switchSprite("attack1");
@@ -145,6 +150,10 @@ class Players extends Sprite {
         setTimeout(() => {
             this.isAttacking = false;
         }, 100);
+
+        setTimeout(() => {
+            this.canAttack = true;
+        }, this.attackCooldown);
     }
 
     switchSprite(sprite) {
@@ -164,7 +173,9 @@ class Players extends Sprite {
             (this.image === this.sprites.heavyAttack.image &&
                 this.framesCurrentW < this.sprites.heavyAttack.framesW - 1) ||
             (this.image === this.sprites.hurt.image &&
-                this.framesCurrentW < this.sprites.hurt.framesW - 1)
+                this.framesCurrentW < this.sprites.hurt.framesW - 1) ||
+            (this.image === this.sprites.blockImpact.image &&
+                this.framesCurrentW < this.sprites.blockImpact.framesW - 1)
         ) {
             return;
         }
@@ -175,6 +186,7 @@ class Players extends Sprite {
                     this.framesCurrentW = 0;
                     this.image = this.sprites.idle.image;
                     this.framesW = this.sprites.idle.framesW;
+                    this.framesHold = this.sprites.idle.framesHold;
                 }
                 break;
             case "run":
@@ -182,6 +194,7 @@ class Players extends Sprite {
                     this.framesCurrentW = 0;
                     this.image = this.sprites.run.image;
                     this.framesW = this.sprites.run.framesW;
+                    this.framesHold = this.sprites.run.framesHold;
                 }
                 break;
             case "jumpUp":
@@ -189,6 +202,7 @@ class Players extends Sprite {
                     this.framesCurrentW = 0;
                     this.image = this.sprites.jumpUp.image;
                     this.framesW = this.sprites.jumpUp.framesW;
+                    this.framesHold = this.sprites.jumpUp.framesHold;
                 }
                 break;
             case "jumpDown":
@@ -196,6 +210,7 @@ class Players extends Sprite {
                     this.framesCurrentW = 0;
                     this.image = this.sprites.jumpDown.image;
                     this.framesW = this.sprites.jumpDown.framesW;
+                    this.framesHold = this.sprites.jumpDown.framesHold;
                 }
                 break;
             case "attack1":
@@ -246,6 +261,22 @@ class Players extends Sprite {
                     this.framesHold = this.sprites.hurt.framesHold;
                 }
                 break;
+            case "block":
+                if (this.image !== this.sprites.block.image) {
+                    this.framesCurrentW = 0;
+                    this.image = this.sprites.block.image;
+                    this.framesW = this.sprites.block.framesW;
+                    this.framesHold = this.sprites.block.framesHold;
+                }
+                break;
+            case "blockImpact":
+                if (this.image !== this.sprites.blockImpact.image) {
+                    this.framesCurrentW = 0;
+                    this.image = this.sprites.blockImpact.image;
+                    this.framesW = this.sprites.blockImpact.framesW;
+                    this.framesHold = this.sprites.blockImpact.framesHold;
+                }
+                break;
         }
     }
 }
@@ -270,18 +301,22 @@ const player1 = new Players({
         idle: {
             imageSrc: "./assets/Player1/player1_idle.png",
             framesW: 7,
+            framesHold: 5,
         },
         run: {
             imageSrc: "./assets/Player1/player1_run.png",
             framesW: 10,
+            framesHold: 4,
         },
         jumpUp: {
             imageSrc: "./assets/Player1/player1_jumpUp.png",
             framesW: 3,
+            framesHold: 12,
         },
         jumpDown: {
             imageSrc: "./assets/Player1/player1_jumpDown.png",
             framesW: 4,
+            framesHold: 9,
         },
         attack1: {
             imageSrc: "./assets/Player1/player1_attack1.png",
@@ -313,6 +348,16 @@ const player1 = new Players({
             framesW: 3,
             framesHold: 4,
         },
+        block: {
+            imageSrc: "./assets/Player1/player1_block_idle.png",
+            framesW: 8,
+            framesHold: 5,
+        },
+        blockImpact: {
+            imageSrc: "./assets/Player1/player1_block_impact.png",
+            framesW: 5,
+            framesHold: 7,
+        },
     },
 
     framesHold: 8,
@@ -339,18 +384,22 @@ const player2 = new Players({
         idle: {
             imageSrc: "./assets/Player2/Idle.png",
             framesW: 10,
+            framesHold: 4,
         },
         run: {
             imageSrc: "./assets/Player2/Run.png",
             framesW: 8,
+            framesHold: 5,
         },
         jumpUp: {
             imageSrc: "./assets/Player2/Going_Up.png",
             framesW: 3,
+            framesHold: 12,
         },
         jumpDown: {
             imageSrc: "./assets/Player2/Going_Down.png",
             framesW: 3,
+            framesHold: 12,
         },
         attack1: {
             imageSrc: "./assets/Player2/Attack1.png",
@@ -368,7 +417,7 @@ const player2 = new Players({
             framesHold: 4,
         },
         death: {
-            imageSrc: "./assets/Player2/Death.png",
+            imageSrc: "./assets/Player2/Death1.png",
             framesW: 11,
             framesHold: 11,
         },
@@ -381,6 +430,11 @@ const player2 = new Players({
             imageSrc: "./assets/Player2/Hurt.png",
             framesW: 3,
             framesHold: 6,
+        },
+        blockImpact: {
+            imageSrc: "./assets/Player1/player1_block_impact.png",
+            framesW: 8,
+            framesHold: 5,
         },
     },
     framesHold: 8,
