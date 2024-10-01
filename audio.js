@@ -59,6 +59,16 @@ function shieldImpact() {
     }
 }
 
+function swordImpact() {
+    if (player1.attackCount % 3 === 1) {
+        swordBlock1.Audio.play();
+    } else if (player1.attackCount % 3 === 2) {
+        swordBlock2.Audio.play();
+    } else {
+        swordBlock3.Audio.play();
+    }
+}
+
 const backgroundMusic = new soundEffects({
     source: "./assets/audio/battlefield.wav",
     speed: 1,
@@ -120,6 +130,12 @@ const attackSound3 = new soundEffects({
     volume: 1,
 });
 
+const heavyAttackSound = new soundEffects({
+    source: "./assets/audio/heavy-attack.wav",
+    speed: 1,
+    volume: 1,
+});
+
 const impactSound1 = new soundEffects({
     source: "./assets/audio/Sword Impact Hit 1.ogg",
     speed: 1,
@@ -165,5 +181,23 @@ const shieldBlock2 = new soundEffects({
 const shieldBlock3 = new soundEffects({
     source: "./assets/audio/Shield Block 3.wav",
     speed: 1.1,
+    volume: 0.8,
+});
+
+const swordBlock1 = new soundEffects({
+    source: "./assets/audio/swordBlock1.wav",
+    speed: 1,
+    volume: 0.8,
+});
+
+const swordBlock2 = new soundEffects({
+    source: "./assets/audio/swordBlock2.wav",
+    speed: 1,
+    volume: 0.8,
+});
+
+const swordBlock3 = new soundEffects({
+    source: "./assets/audio/swordBlock3.wav",
+    speed: 1,
     volume: 0.8,
 });

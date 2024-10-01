@@ -32,11 +32,19 @@ function animate() {
     player1.velocity.x = 0;
     player2.velocity.x = 0;
 
-    if (keys.a.pressed && player1.lastKey === "a") {
+    if (
+        keys.a.pressed &&
+        player1.lastKey === "a" &&
+        player1.image != player1.sprites.death.image
+    ) {
         player1.velocity.x = -5;
         player1.switchSprite("run");
         if (player1.position.y === 407) chainRun1.Audio.play();
-    } else if (keys.d.pressed && player1.lastKey === "d") {
+    } else if (
+        keys.d.pressed &&
+        player1.lastKey === "d" &&
+        player1.image != player1.sprites.death.image
+    ) {
         player1.velocity.x = 5;
         player1.switchSprite("run");
         if (player1.position.y === 407) chainRun1.Audio.play();
@@ -61,6 +69,8 @@ function animate() {
         player2.velocity.x = 5;
         player2.switchSprite("run");
         if (player2.position.y === 407) run1.Audio.play();
+    }else if (keys.ArrowDown.pressed && player2.lastKey === "ArrowDown") {
+        player2.switchSprite("block");
     } else {
         player2.switchSprite("idle");
     }
@@ -74,7 +84,7 @@ function animate() {
 
     if (
         collisionDetection({ box1: player1, box2: player2 }) &&
-        player1.isAttacking
+        player1.isAttacking && !player2.isBlocking
     ) {
         player1.succesfulAttackCount++;
         if (player1.succesfulAttackCount % 3 === 0) {
@@ -84,6 +94,7 @@ function animate() {
         player2.health = player2.health - 7;
         if (player2.health <= 0) player2.health = 0;
         if (player2.health === 0) {
+            player2.canAttack = false;
             player2.switchSprite("death");
             strangledThroat.Audio.play();
         }
@@ -91,6 +102,32 @@ function animate() {
         player2.switchSprite("hurt");
         document.querySelector("#player2-health").style.width =
             player2.health + "%";
+    }else if (
+        collisionDetection({ box1: player1, box2: player2 }) &&
+        player1.isAttacking &&
+        player2.isBlocking
+    ) {
+        if (player1.direction !== player2.direction) {
+            player2.switchSprite("blockImpact");
+            swordImpact();
+        } else {
+            player1.succesfulAttackCount++;
+            player1.isAttacking = false;
+            player2.health = player2.health - 7;
+            if (player2.health <= 0) player2.health = 0;
+            if (player2.health === 0) {
+                player2.canAttack = false;
+                player2.switchSprite("death");
+                strangledThroat.Audio.play();
+            }
+            impact();
+            player2.switchSprite("hurt");
+            if (player1.succesfulAttackCount % 3 === 0) {
+                player1.checkHeavyAttack = true;
+            }
+            document.querySelector("#player2-health").style.width =
+                player2.health + "%";
+        }
     }
     if (
         collisionDetection({ box1: player1, box2: player2 }) &&
@@ -101,10 +138,12 @@ function animate() {
         player2.health = player2.health - 14;
         if (player2.health <= 0) player2.health = 0;
         if (player2.health === 0) {
+            player2.canAttack = false;
             player2.switchSprite("death");
             strangledThroat.Audio.play();
         }
         player1.checkHeavyAttack = false;
+        heavyAttackSound.Audio.play();
         impact();
         player2.switchSprite("hurt");
         document.querySelector("#player2-health").style.width =
@@ -121,6 +160,7 @@ function animate() {
         player1.health = player1.health - 7;
         if (player1.health <= 0) player1.health = 0;
         if (player1.health === 0) {
+            player1.canAttack = false;
             player1.switchSprite("death");
             bloodSpill.Audio.play();
         }
@@ -136,7 +176,27 @@ function animate() {
         player2.isAttacking &&
         player1.isBlocking
     ) {
-        player1.switchSprite("blockImpact");
+        if (player1.direction !== player2.direction) {
+            player1.switchSprite("blockImpact");
+            shieldImpact();
+        } else {
+            player2.succesfulAttackCount++;
+            player2.isAttacking = false;
+            player1.health = player1.health - 7;
+            if (player1.health <= 0) player1.health = 0;
+            if (player1.health === 0) {
+                player1.canAttack = false;
+                player1.switchSprite("death");
+                bloodSpill.Audio.play();
+            }
+            impact();
+            player1.switchSprite("hurt");
+            if (player2.succesfulAttackCount % 3 === 0) {
+                player2.checkHeavyAttack = true;
+            }
+            document.querySelector("#player1-health").style.width =
+                player1.health + "%";
+        }
     }
     if (
         collisionDetection({ box1: player2, box2: player1 }) &&
@@ -149,9 +209,11 @@ function animate() {
         player1.health = player1.health - 14;
         if (player1.health <= 0) player1.health = 0;
         if (player1.health === 0) {
+            player1.canAttack = false;
             player1.switchSprite("death");
             bloodSpill.Audio.play();
         }
+        heavyAttackSound.Audio.play();
         impact();
         player1.switchSprite("hurt");
         document.querySelector("#player1-health").style.width =

@@ -28,7 +28,7 @@ class Players extends Sprite {
         });
         this.isBlocking = false;
         this.canAttack = true;
-        this.attackCooldown = 600;
+        this.attackCooldown = 500;
         this.isDead = false;
         this.direction = direction;
         this.velocity = velocity;
@@ -321,17 +321,17 @@ const player1 = new Players({
         attack1: {
             imageSrc: "./assets/Player1/player1_attack1.png",
             framesW: 6,
-            framesHold: 6,
+            framesHold: 5,
         },
         attack2: {
             imageSrc: "./assets/Player1/player1_attack2.png",
             framesW: 6,
-            framesHold: 6,
+            framesHold: 5,
         },
         attack3: {
             imageSrc: "./assets/Player1/player1_attack3.png",
             framesW: 8,
-            framesHold: 5,
+            framesHold: 3,
         },
         death: {
             imageSrc: "./assets/Player1/player1_death.png",
@@ -404,17 +404,17 @@ const player2 = new Players({
         attack1: {
             imageSrc: "./assets/Player2/Attack1.png",
             framesW: 7,
-            framesHold: 5,
+            framesHold: 4,
         },
         attack2: {
             imageSrc: "./assets/Player2/Attack2.png",
             framesW: 6,
-            framesHold: 6,
+            framesHold: 5,
         },
         attack3: {
             imageSrc: "./assets/Player2/Attack3.png",
             framesW: 9,
-            framesHold: 4,
+            framesHold: 3,
         },
         death: {
             imageSrc: "./assets/Player2/Death1.png",
@@ -431,10 +431,15 @@ const player2 = new Players({
             framesW: 3,
             framesHold: 6,
         },
+        block: {
+            imageSrc: "./assets/Player2/BlockIdle.png",
+            framesW: 4,
+            framesHold: 15,
+        },
         blockImpact: {
-            imageSrc: "./assets/Player1/player1_block_impact.png",
-            framesW: 8,
-            framesHold: 5,
+            imageSrc: "./assets/Player2/BlockImpact.png",
+            framesW: 4,
+            framesHold: 7,
         },
     },
     framesHold: 8,

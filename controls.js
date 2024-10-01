@@ -6,6 +6,7 @@ const keys = {
     ArrowLeft: { pressed: false },
     ArrowRight: { pressed: false },
     ArrowUp: { pressed: false },
+    ArrowDown: {pressed: false},
     s: { pressed: false },
     1: { pressed: false },
 };
@@ -67,9 +68,21 @@ window.addEventListener("keydown", (event) => {
                 player2.velocity.y = -15;
             }
             break;
+        case "ArrowDown":
+            if (player2.velocity.y === 0) {
+                keys.ArrowDown.pressed = true;
+                player2.velocity.y = 0;
+                player2.velocity.x = 0;
+                player2.canAttack = false;
+                player2.isBlocking = true;
+                player2.lastKey = "ArrowDown";
+            }
+            break;
         case "0":
-            if (!player2.isDead) player2.attack();
-            player2.lastKey = "0";
+            if (!player2.isDead) {
+                player2.attack();
+                player2.lastKey = "0";
+            }
             break;
         case "1":
             if (player2.checkHeavyAttack === true) {
@@ -104,5 +117,10 @@ window.addEventListener("keyup", (event) => {
         case "ArrowUp":
             keys.ArrowUp.pressed = false;
             break;
+        case "ArrowDown":
+            keys.ArrowDown.pressed = false;
+            player2.canAttack = true;
+            player2.isBlocking = false;
+            break;  
     }
 });
