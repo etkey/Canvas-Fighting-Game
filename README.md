@@ -10,12 +10,12 @@ Each player has the same amount of health and damage. Heavy attacks deal twice t
 
 ![HeroKnight_BlockNoEffect_4](https://github.com/user-attachments/assets/1552dca1-0f3b-4699-ba0a-2ae264799b02)
 
--w: jump
--a: move left
--d: move right
--s: shield block
--space: attack
--c: heavy attack
+- w: jump
+- a: move left
+- d: move right
+- s: shield block
+- space: attack
+- c: heavy attack
 
 ### Player2:
 
