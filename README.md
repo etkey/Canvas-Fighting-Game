@@ -1,4 +1,4 @@
-# A 2D Pixel Fighting Game HTML5 <canvas>
+# 2D Pixel Fighting Game HTML5 Canvas
 
 ![Screenshot from 2024-10-01 20-17-31](https://github.com/user-attachments/assets/53894d84-03a0-46f4-a014-919f721af3c6)
 
@@ -30,7 +30,9 @@ Each player has the same amount of health and damage. Heavy attacks deal twice t
 - 1: heavy attack
 
 ## Developer's Notes
+
  I have created this game on top of Chris Courses' fighting game tutorial. Check him out at https://www.youtube.com/@ChrisCourses .
+ 
 ### What I personally added to make this game my own:
 
 ### Gameplay
