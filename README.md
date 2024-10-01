@@ -1,10 +1,11 @@
 # A 2D Pixel Fighting Game HTML5 <canvas>
 
-![Screenshot from 2024-10-01 20-17-31](https://github.com/user-attachments/assets/255397cb-9f4d-4a65-8424-9fd84eb1a6f6)
+![Screenshot from 2024-10-01 20-17-31](https://github.com/user-attachments/assets/53894d84-03a0-46f4-a014-919f721af3c6)
+
 
 ## How to Play
 
-Each player has the same amount of health and damage. Heavy attacks deal twice the damage. Blocks only work against normal attacks. A player wins by having more health than the other player before the game reaches its end which is sixty seconds, or it is a tie between the player.
+Each player has the same amount of health and damage. Heavy attacks deal twice the damage. Blocks only work against normal attacks. A player wins by having more health than the other player before the game reaches its end which is sixty seconds, or it is a tie between the players.
 
 ### Player1:
 
@@ -44,6 +45,7 @@ Each player has the same amount of health and damage. Heavy attacks deal twice t
 - Background: Created a Gothic medieval city view.
 
 ### Sound Effects
+- Background Music: Added background music that can be muted and unmuted.
 - Walking SFX: Player1 has a metallic walk sound because of the heavy armor, Player2 has a softer walk sound because of the lack of armor. 
 - Jumping and landing SFX: Player1 has a metallic jumping and landing sound because of the heavy armor, Player2 has a softer jumping and landing sound because of the lack of armor.
 - Attack SFX: Slashing sounds that are changing every swing are added.
