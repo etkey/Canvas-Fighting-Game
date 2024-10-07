@@ -22,7 +22,7 @@ Each player has the same amount of health and damage. Heavy attacks deal twice t
 
 ![prev](https://github.com/user-attachments/assets/7417bd78-2244-4338-b382-d654ff47f52e)
 
-- arrowup: jump
+- arrow up: jump
 - arrow left: move left
 - arrow right: move right
 - arrow down: sword block
